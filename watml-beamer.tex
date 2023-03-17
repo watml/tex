@@ -1,0 +1,332 @@
+\synctex=1
+
+\usepackage{adjustbox}
+\usepackage{algorithmic}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+% https://tex.stackexchange.com/questions/162207/algorithm2e-comment-style
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{gray}{#1}}
+\SetCommentSty{mycommfont}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+
+\usepackage{booktabs}
+%https://tex.stackexchange.com/questions/269547/rowcolor-for-a-multirow
+%\rowcolors{1}{}{gray} % set alternating table color to gray
+\usepackage{boldline}
+\usepackage{cellspace}
+\setlength\cellspacetoplimit{4pt}
+\setlength\cellspacebottomlimit{4pt}
+
+
+\usepackage{cancel}
+% https://tex.stackexchange.com/questions/29082/latex-beamer-applies-the-cancel-command-only-a-specified-slides
+\newcommand<>{\xxcancel}[1]{\alt#2{\xcancel{#1}\vphantom{#1}}{#1}}
+\usepackage[font=small,margin=0.25in,labelfont={sc},labelsep={colon}]{caption}
+\usepackage{cleveref} % must be loaded after amsmath and hyperef
+% incompatible with biblatex, hack must appear afterwards
+\let\etoolboxforlistloop\forlistloop % save the good meaning of \forlistloop
+\usepackage{autonum} % must be loaded after cleveref
+\let\forlistloop\etoolboxforlistloop % restore the good meaning of \forlistloop
+
+\usepackage{empheq}
+%\usepackage{enumerate}
+\usepackage[inline]{enumitem}
+\usepackage{etoolbox}
+% https://github.com/plk/biblatex/issues/669
+\cslet{blx@noerroretextools}\empty % to ensure compatibility between autonum and biblatex
+
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{fontawesome}
+\usepackage[T1]{fontenc}
+%\usepackage{fourier}
+
+\usepackage{graphicx}
+
+\usepackage{listofitems}
+\usepackage{longtable}
+
+\usepackage{marvosym}
+\usepackage{mathtools}
+%\usepackage{minted}
+\usepackage{multirow} 
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepgfplotslibrary{fillbetween}
+
+%\usepackage{setspace} % will disable footnote, use \footnote[frame,1]{My footnote}; see https://tex.stackexchange.com/questions/27626/beamer-footnote-not-showing
+\usepackage{siunitx} % align decimals in tables
+\usepackage{stmaryrd}
+\usepackage{subfig}
+
+\usepackage{tabu} 
+\setlength{\tabulinesep}{1mm}
+\usepackage[most,breakable]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{angles}
+\usetikzlibrary{arrows}
+\usetikzlibrary{bayesnet}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric}
+\usepackage{twemojis}
+
+\usepackage[normalem]{ulem}
+%%%%%%%%%%%%%%%%%%%%%%  hyperref, url colors %%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{% 
+  colorlinks,linkcolor=UWteal3,citecolor=UWteal3,urlcolor=UWteal3,filecolor=UWteal3,bookmarks=true}
+\renewcommand{\url}[1]{\href{#1}{\texttt{#1}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%  define footer %%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+%\setbeamercolor{myfootlinetitle}{fg=UWyellow}
+% https://tex.stackexchange.com/questions/592612/change-text-color-for-short-title-in-beamer
+% shortsubtitle and shorttitle are links and hence controlled by hyperref
+\setbeamercolor{myfootlinepage}{fg=UWblack3}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{section in foot}%
+      \usebeamerfont{title in head/foot}\hspace*{1ex}\insertshortsubtitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+%      \usebeamerfont{author in head/foot}\insertshortauthor
+    \end{beamercolorbox}%    
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{myfootlinepage}%
+      \usebeamerfont{date in head/foot} %\insertshortdate{}\hspace*{2em}
+        \insertframenumber/\inserttotalframenumber\hspace*{1ex} 
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%  footnote cite  %%%%%%%%%%%%%%%%%%%%%%
+% from https://tex.stackexchange.com/questions/106834/nocite-like-macro-for-footfullcite-in-beamer
+%%\toggletrue{abx@bool@giveninits} % use initials for given names
+% https://tex.stackexchange.com/questions/235417/disable-hyperlinks-for-citations
+\ExecuteBibliographyOptions{hyperref=false,backref=false,giveninits=true,maxbibnames=9,maxcitenames=2,uniquelist=false,uniquename=false,sorting=none} % config biblatex
+\newrobustcmd*{\footfullcitenomark}{%
+  \AtNextCite{%
+    \let\thefootnote\relax
+    \let\mkbibfootnote\mkbibfootnotetext}%
+  \footfullcite}
+
+% based on default footnote template from beamerinnerthemedefault.sty
+\defbeamertemplate*{footnotetext}{default}{%
+  %\parindent 1em\noindent%
+  \raggedright
+  %\hbox to 1.8em{\hfil\insertfootnotemark}%
+  \insertfootnotetext\par}
+
+\newrobustcmd*{\footfullcitenomarkleft}{%
+  \AtNextCite{%
+    \setbeamertemplate{footnote}{\usebeamertemplate{footnotetext}}%
+    \let\mkbibfootnote\mkbibfootnotetext}%
+  \footfullcite}
+
+
+%%%%%%%%%%%%%%%%%%%%%%  theorem inline style  %%%%%%%%%%%%%%%%%%%%%%
+% \makeatletter % % https://tex.stackexchange.com/questions/8351/what-do-makeatletter-and-makeatother-do
+% \setbeamertemplate{theorem begin}
+% {%
+%   \inserttheoremheadfont% \bfseries
+%   \inserttheoremname \inserttheoremnumber
+%   \ifx\inserttheoremaddition\@empty\else\ (\inserttheoremaddition)\fi%
+%   \inserttheorempunctuation
+%   \xspace
+% }
+% \setbeamertemplate{theorem end}{%
+%   % empty
+% }
+% \makeatother
+\newtcolorbox{thm}[1][]{colback=red!5!white,colframe=red!75!black,%
+	boxsep=2pt,left=3pt,right=3pt,top=2pt,bottom=2pt,% 
+	boxrule=2pt,bottomrule=1pt,toprule=2pt,%
+	beforeafter skip balanced=10pt,%
+	title=Theorem: \protect{#1}}
+\newtcolorbox{cor}[1][]{colback=red!5!white,colframe=red!75!black,%
+	boxsep=2pt,left=3pt,right=3pt,top=2pt,bottom=2pt,% 
+	boxrule=2pt,bottomrule=1pt,toprule=2pt,%
+	beforeafter skip balanced=10pt,%
+	title=Corollary: \protect{#1} } % https://tex.stackexchange.com/questions/204577/math-inside-title-in-tcolorbox
+\newtcolorbox{defn}[1][]{colback=blue!5!white,colframe=blue!75!black,%
+	boxsep=2pt,left=3pt,right=3pt,top=2pt,bottom=2pt,% 
+	boxrule=2pt,bottomrule=1pt,toprule=2pt,%
+	beforeafter skip balanced=10pt,%
+	title=Definition: \protect{#1} }
+\newtcolorbox{exm}[1][]{colback=ForestGreen!5!white,colframe=ForestGreen!75!black,%
+	boxsep=2pt,left=3pt,right=3pt,top=2pt,bottom=2pt,% 
+	boxrule=2pt,bottomrule=1pt,toprule=2pt,%
+	beforeafter skip balanced=10pt,%
+	title=Example: \protect{#1}	}
+	
+%%%%%%%%%%%%%%%%%%%%%%  UW beamer theme  %%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{frametitle}{%
+    \usebeamerfont{frametitle}\insertframetitle%
+    \vphantom{g}% To avoid fluctuations per frame
+    %\hrule% Uncomment to see desired effect, without a full-width hrule
+    \par% <-- added
+    \hspace*{-\dimexpr0.5\paperwidth-0.5\textwidth}% <-- calculation of left margin width
+    \rule[0.6\baselineskip]{\paperwidth}{0.8pt}% [] reduce vertical space before rule
+    \par\vspace*{-0.6\baselineskip}% <-- reduce vertical space after rule
+}
+\setbeamercolor{math text}{fg=UWpink2}
+\newcommand\beamermathcolor[1]{\color{#1}\setbeamercolor{math text}{fg=#1}}
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{8pt}%
+  \setlength{\belowdisplayskip}{8pt}%
+  \setlength{\abovedisplayshortskip}{6pt}%
+  \setlength{\belowdisplayshortskip}{6pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamerfont{subtitle}{size=\large}
+%\setbeamercolor{background canvas}{bg=yellow!10}
+%\setbeamercolor{background canvas}{bg=black}
+\definecolor{offwhite}{RGB}{249,242,215}
+\definecolor{foreground}{RGB}{255,255,255}
+\definecolor{background}{RGB}{24,24,24}
+\definecolor{title}{RGB}{107,174,214}
+\definecolor{gray}{RGB}{155,155,155}
+\definecolor{subtitle}{RGB}{102,255,204}
+\definecolor{hilight}{RGB}{102,255,204}
+\definecolor{vhilight}{RGB}{255,111,207}
+\definecolor{lolight}{RGB}{155,155,155}
+%\definecolor{green}{RGB}{125,250,125}
+\setbeamercolor{titlelike}{fg=UWyellow}
+%\setbeamercolor{titlelike}{fg=title}
+\setbeamercolor{subtitle}{fg=UWorange3}
+\setbeamercolor{institute}{fg=UWblack2}
+\setbeamercolor{normal text}{fg=foreground,bg=background}
+\setbeamercolor{item}{fg=foreground} % color of bullets
+\setbeamercolor{subitem}{fg=UWblack2}
+\setbeamercolor{itemize/enumerate subbody}{fg=UWblack2}
+\setbeamertemplate{itemize subitem}{{\textendash}}
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setbeamerfont{itemize/enumerate subitem}{size=\footnotesize}
+\setbeamercolor{footnote}{fg=gray}
+\setbeamercolor{footnote mark}{fg=UWteal3}
+\setbeamercolor{bibliography entry author}{fg=gray}
+\setbeamercolor{bibliography entry note}{fg=gray}
+
+
+%%%%%%%%%%%%%%%%%%%%%%  redefine itemsep to autofill space on beamer  %%%%%%%%%%%%%%%%%%%%%%
+% % from https://tex.stackexchange.com/questions/369504#369597
+\makeatletter
+\renewcommand{\itemize}[1][]{%
+	\beamer@ifempty{#1}{}{\def\beamer@defaultospec{#1}}%
+	\ifnum \@itemdepth >2\relax\@toodeep\else
+	\advance\@itemdepth\@ne
+	\beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+	\usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+	\list
+	{\usebeamertemplate{itemize \beameritemnestingprefix item}}
+	{\def\makelabel##1{%
+			{%
+				\hss\llap{{%
+						\usebeamerfont*{itemize \beameritemnestingprefix item}%
+						\usebeamercolor[fg]{itemize \beameritemnestingprefix item}##1}}%
+			}%
+		}%
+	}
+	\fi%
+	\setlength\itemsep{\fill}
+	\ifnum \@itemdepth >1
+	\vfill
+	\fi%  
+	\beamer@cramped%
+	\raggedright%
+	\beamer@firstlineitemizeunskip%
+}
+\def\enditemize{\ifhmode\unskip\fi\endlist%
+	\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body end}
+	\ifnum \@itemdepth >1
+	\vfil
+	\fi%  
+}
+\makeatother
+
+\makeatletter
+\def\enumerate{%
+	\ifnum\@enumdepth>2\relax\@toodeep
+	\else%
+	\advance\@enumdepth\@ne%
+	\edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+	\advance\@itemdepth\@ne%
+	\fi%
+	\beamer@computepref\@enumdepth% sets \beameritemnestingprefix
+	\edef\beamer@enumtempl{enumerate \beameritemnestingprefix item}%
+	\@ifnextchar[{\beamer@@enum@}{\beamer@enum@}}
+\def\beamer@@enum@[{\@ifnextchar<{\beamer@enumdefault[}{\beamer@@@enum@[}}
+\def\beamer@enumdefault[#1]{\def\beamer@defaultospec{#1}%
+	\@ifnextchar[{\beamer@@@enum@}{\beamer@enum@}}
+\def\beamer@@@enum@[#1]{% partly copied from enumerate.sty
+	\@enLab{}\let\@enThe\@enQmark
+	\@enloop#1\@enum@
+	\ifx\@enThe\@enQmark\@warning{The counter will not be printed.%
+		^^J\space\@spaces\@spaces\@spaces The label is: \the\@enLab}\fi
+	\def\insertenumlabel{\the\@enLab}
+	\def\beamer@enumtempl{enumerate mini template}%
+	\expandafter\let\csname the\@enumctr\endcsname\@enThe
+	\csname c@\@enumctr\endcsname7
+	\expandafter\settowidth
+	\csname leftmargin\romannumeral\@enumdepth\endcsname
+	{\the\@enLab\hspace{\labelsep}}%
+	\beamer@enum@}
+\def\beamer@enum@{%
+	\beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+	\usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+	\expandafter
+	\list
+	{\usebeamertemplate{\beamer@enumtempl}}
+	{\usecounter\@enumctr%
+		\def\makelabel##1{{\hss\llap{{%
+						\usebeamerfont*{enumerate \beameritemnestingprefix item}%
+						\usebeamercolor[fg]{enumerate \beameritemnestingprefix item}##1}}}}}%
+	\setlength\itemsep{\fill}
+	\ifnum \@itemdepth >1
+	\vfill
+	\fi%  
+	\beamer@cramped%
+	\raggedright%
+	\beamer@firstlineitemizeunskip%
+}
+\def\endenumerate{\ifhmode\unskip\fi\endlist%
+	\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body end}
+	\ifnum \@itemdepth >1
+	\vfil
+	\fi%  
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%  set larger itemize font sizes  %%%%%%%%%%%%%%%%%%%%%%
+% % % from https://latex.org/forum/viewtopic.php?t=8515
+% \setbeamerfont{itemize/enumerate body}{size=\Large}
+% \setbeamerfont{itemize/enumerate subbody}{size=\large}
+% \setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+%%%%%%%%%%%%%%%%%%%%%%  set larger math font sizes  %%%%%%%%%%%%%%%%%%%%%%
+% % % redefine \[\] via redefinition of same as equation* to be LARGE
+% % % from https://tex.stackexchange.com/a/40531
+% \usepackage{etoolbox}
+% \BeforeBeginEnvironment{equation*}{\begingroup\LARGE}
+% \AfterEndEnvironment{equation*}{\endgroup}
+% \BeforeBeginEnvironment{align*}{\begingroup\LARGE}
+% \AfterEndEnvironment{align*}{\endgroup}
+
+% https://tex.stackexchange.com/questions/186411/where-to-put-renewcommand-in-beamer
+\usepackage{letltxmacro}
+\LetLtxMacro\olditemize\itemize
+\makeatletter
+\g@addto@macro\beamer@lastminutepatches{\renewcommand{\itemize}[1][<+(1)->]{\olditemize[#1]}}
+\makeatother

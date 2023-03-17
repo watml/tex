@@ -1,0 +1,56 @@
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[backend=biber,defernumbers=true,url=false,doi=false,isbn=false]{biblatex}
+
+\renewbibmacro{in:}{%
+	\ifentrytype{article}{}{%
+		\printtext{\bibstring{in}\intitlepunct}}}
+\renewbibmacro*{volume+number+eid}{%
+	\printfield{volume}%
+	%  \setunit*{\adddot}% DELETED
+	\setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
+	\printfield{number}%
+	\setunit{\addcomma\space}%
+	\printfield{eid}}
+%\DeclareFieldFormat[article]{number}{\mkbibparens{#1}} 
+\renewbibmacro*{volume+number+eid}{%
+	\setunit*{\addcomma\space}% NEW
+	\printfield{volume}%
+	%  \setunit*{\adddot}% DELETED
+	\setunit*{\addcomma\space}% NEW
+	\printfield{number}%
+	\setunit{\addcomma\space}%
+	\printfield{eid}
+}
+\DeclareFieldFormat[article]{volume}{\bibstring{volume}~#1}% volume of a journal
+\DeclareFieldFormat[article]{number}{\bibstring{number}~#1}% number of a journal
+
+\newbibmacro{string+doiurlisbn}[1]{%
+  \iffieldundef{doi}{%
+    \iffieldundef{url}{%
+      \iffieldundef{isbn}{%
+        \iffieldundef{issn}{%
+          #1%
+        }{%
+          \href{http://books.google.com/books?vid=ISSN\thefield{issn}}{#1}%
+        }%
+      }{%
+        \href{http://books.google.com/books?vid=ISBN\thefield{isbn}}{#1}%
+      }%
+    }{%
+      \href{\thefield{url}}{#1}%
+    }%
+  }{%
+    \href{http://dx.doi.org/\thefield{doi}}{#1}%
+  }%
+}
+\DeclareFieldFormat*{title}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}} % \mkbibemph
+% https://tex.stackexchange.com/questions/191559/biblatex-bibliography-title-fields-for-different-entries
+%\DeclareFieldFormat[article,incollection]{title}{\usebibmacro{string+doiurlisbn}{\mkbibquote{#1}}}
+
+\defbibheading{bibliography}[\bibname]{%
+  \subsection*{#1}%
+  \markboth{#1}{#1}
+}
+\renewcommand*{\bibfont}{\small}
