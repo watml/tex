@@ -1,0 +1,102 @@
+\documentclass[letterpaper,12pt,titlepage,oneside,final]{book}
+ 
+\usepackage{watml}
+
+\setlength{\marginparwidth}{0pt} 
+\setlength{\marginparsep}{0pt} 
+\setlength{\evensidemargin}{0.125in} 
+\setlength{\oddsidemargin}{0.125in}
+\setlength{\textwidth}{6.375in} 
+\raggedbottom
+
+\setlength{\parskip}{\medskipamount}
+
+\renewcommand{\baselinestretch}{1} 
+
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage{\pagestyle{empty}\origdoublepage}}
+\let\cleardoublepage\clearemptydoublepage
+
+\addbibresource{uw-ethesis.bib}
+% \graphicspath{{figs/}} % set figure path
+
+% \usepackage[automake,toc,abbreviations]{glossaries-extra}
+% \input{glossaries.tex}
+% \makeglossaries
+
+\def\title{Awesome Thesis Title}
+\def\author{Awesome Author}
+\def\year{2024}
+
+\def\degree{2} % 0: Comp-II, 1: MMath, 2: PhD 
+
+\def\externalexaminer{%
+\> Name \\ 
+\> Rank \\
+\> Affiliation }
+
+\def\supervisor{%
+\> Yaoliang Yu \\ 
+\> Associate Professor \\ 
+\> School of Computer Science, University of Waterloo}
+
+\def\internalone{%
+\> Name \\ 
+\> Rank \\
+\> School of Computer Science, University of Waterloo
+}
+
+\def\internaltwo{%
+\> Name \\ 
+\> Rank \\
+\> School of Computer Science, University of Waterloo
+}
+
+\def\internalexternal{%
+\> Name \\ 
+\> Rank \\
+\> Department of xxxxx, University of Waterloo
+}
+
+\def\declaration{%
+\noindent
+I hereby declare that I am the sole author of this thesis. This is a true copy of the thesis, including any required final revisions, as accepted by my examiners.
+
+\bigskip
+  
+\noindent
+I understand that my thesis may be made electronically available to the public.
+}
+
+\def\Statement{%
+This thesis consists of the author's previous work: 
+\begin{itemize}
+  \item citation, listing contribution of each coauthor
+\end{itemize} 
+}
+
+\def\abstract{%
+This awesome thesis saved the world.
+}
+
+\def\acknowledgement{%
+Thank all the little people.
+}
+
+\def\dedication{%
+To my family.
+}
+
+\begin{document}
+
+\input{uw-ethesis-frontpgs} 
+
+% \input{chapters/introduction.tex}
+% \input{chapters/background.tex}
+% \input{chapters/conclusion.tex}
+
+%\nocite{*}
+\printbibliography[title=References]
+
+\end{document}
