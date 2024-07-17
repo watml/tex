@@ -64,6 +64,7 @@
 \newenvironment{myboxeq}[1][red]{\empheq[box={\mymath[#1]}]{align}}{\endempheq}
 
 %%%%%%%%%%%%%%% Widely accepted Sets and Symbols %%%%%%%%%%%%%%%
+\newcommand{\twoheadmapsto}{\mapsto\!\!\!\!\to}
 \newcommand{\CC}{\mathds{C}} % Complex numbers
 \newcommand{\CE}{\text{\Cross}} % Cross Entropy
 \newcommand{\EE}{\mathds{E}} % Expectation
@@ -77,6 +78,8 @@
 \newcommand{\NN}{\mathds{N}} % Natural numbers
 \newcommand{\PP}{\mathds{P}} % Probability
 \newcommand{\prob}{\mathrm{pr}} % Probability
+\newcommand{\pleft}[1][p]{\overset{\leftarrow}{#1}}
+\newcommand{\pright}[1][p]{\overset{\rightarrow}{#1}}
 \newcommand{\pp}{\mathsf{p}} % density
 \newcommand{\qq}{\mathsf{q}} % density
 \newcommand{\QQ}{\mathds{Q}} % Rationals
@@ -143,6 +146,7 @@
 \newcommand{\len}{\mathsf{len}\xspace}
 \newcommand{\link}{\mathtt{link}\xspace}
 \newcommand{\loss}{\mathop{\mathrm{loss}}\xspace}
+\newcommand{\Ltwobar}{\overline{M^2}}
 \newcommand{\MAP}{\ensuremath{\mathsf{MAP}}\xspace}
 \newcommand{\ML}{\ensuremath{\mathsf{MLE}}\xspace}
 \newcommand{\nil}{\textsc{Nil}\xspace}
@@ -159,7 +163,7 @@
 \newcommand{\softmax}{\ensuremath{\mathtt{softmax}\xspace}}
 \newcommand{\SC}[1][\eta]{\mathsf{SC}_{#1}}  % strong convexity
 \renewcommand{\SS}[1][\eta]{\mathsf{SS}_{1/#1}} % strong smoothness
-\newcommand{\Ltwobar}{\overline{M^2}}
+\newcommand{\TVd}{\ensuremath{\mathsf{TV}}\xspace}
 \newcommand{\UKL}{\ensuremath{\widetilde{\KL}}\xspace}
 %%%%%%%%%%%%%%% Mathematical Operations %%%%%%%%%%%%%%%
 \newcommand{\adj}{\mathop{\mathrm{adj}}}
